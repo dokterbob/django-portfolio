@@ -19,15 +19,32 @@ class Category(models.Model):
         return self.title
 
 
-class Artwork(models.Model):
+class Collection(models.Model):
+    """ A collection of artworks. """
+
+    title = models.CharField(_('title'), max_length=255)
+    slug = models.SlugField(_('slug'), db_index=True)
+    description = models.TextField(_('description'), blank=True)
+
+    class Meta:
+        verbose_name = _('collection')
+        verbose_name_plural = _('collections')
+
+    def __unicode__(self):
+        return self.title
+
+
+class Artwork(Sortable):
     """ Piece of art. """
+
+    collection = models.ForeignKey(Collection)
 
     title = models.CharField(_('title'), max_length=255)
     description = models.TextField(_('description'), blank=True)
 
     categories = models.ManyToManyField(Category)
 
-    class Meta:
+    class Meta(Sortable.Meta):
         verbose_name = _('artwork')
         verbose_name_plural = _('artworks')
 
