@@ -1,2 +1,4 @@
 Django>=1.3
 surlex
+sorl-thumbnail
+adminsortable
