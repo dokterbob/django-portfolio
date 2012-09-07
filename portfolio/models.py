@@ -56,8 +56,18 @@ class Picture(Sortable):
     """ Picture of an artwork. """
 
     artwork = models.ForeignKey(Artwork)
+
+    title = models.CharField(_('title'), max_length=255, blank=True)
     image = ImageField(upload_to='portfolio/pictures')
 
     class Meta(Sortable.Meta):
         verbose_name = _('picture')
         verbose_name_plural = _('pictures')
+
+    def __unicode__(self):
+        title = self.title or self.pk
+
+        return _(u"%(artwork)s: %(title)s") % {
+            'artwork': unicode(self.artwork),
+            'title': title
+        }
