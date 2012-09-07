@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from adminsortable.admin import SortableStackedInline
+from adminsortable.admin import SortableStackedInline, SortableAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 
 from .models import Category, Picture, Artwork, Collection
@@ -18,10 +18,13 @@ class CategoryAdmin(admin.ModelAdmin):
 
 class PictureInline(AdminImageMixin, SortableStackedInline):
     model = Picture
+    extra = 1
 
 
-class ArtworkAdmin(admin.ModelAdmin):
+class ArtworkAdmin(SortableAdmin):
     model = Artwork
+    inlines = [PictureInline]
+    filter_horizontal = ['categories']
 
 
 admin.site.register(Collection, CollectionAdmin)
