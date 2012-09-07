@@ -8,10 +8,12 @@ from .models import Category, Picture, Artwork, Collection
 
 class CollectionAdmin(admin.ModelAdmin):
     model = Collection
+    prepopulated_fields = {"slug": ("title",)}
 
 
 class CategoryAdmin(admin.ModelAdmin):
     model = Category
+    prepopulated_fields = {"slug": ("title",)}
 
 
 class PictureInline(AdminImageMixin, SortableStackedInline):

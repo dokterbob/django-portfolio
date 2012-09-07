@@ -9,7 +9,7 @@ class Category(models.Model):
     """ Categorization for works. """
 
     title = models.CharField(_('title'), max_length=255)
-    slug = models.SlugField(_('slug'), db_index=True)
+    slug = models.SlugField(_('slug'), unique=True)
 
     class Meta:
         verbose_name = _('category')
@@ -23,7 +23,7 @@ class Collection(models.Model):
     """ A collection of artworks. """
 
     title = models.CharField(_('title'), max_length=255)
-    slug = models.SlugField(_('slug'), db_index=True)
+    slug = models.SlugField(_('slug'), unique=True)
     description = models.TextField(_('description'), blank=True)
 
     class Meta:
