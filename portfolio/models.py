@@ -19,7 +19,7 @@ class Category(models.Model):
         return self.title
 
 
-class Collection(models.Model):
+class Collection(Sortable):
     """ A collection of artworks. """
 
     title = models.CharField(_('title'), max_length=255)
@@ -42,7 +42,7 @@ class Artwork(Sortable):
     title = models.CharField(_('title'), max_length=255)
     description = models.TextField(_('description'), blank=True)
 
-    categories = models.ManyToManyField(Category)
+    categories = models.ManyToManyField(Category, null=True, blank=True)
 
     class Meta(Sortable.Meta):
         verbose_name = _('artwork')
