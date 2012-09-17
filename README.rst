@@ -4,7 +4,15 @@ django-portfolio
 .. image:: https://secure.travis-ci.org/dokterbob/django-portfolio.png
     :target: http://travis-ci.org/dokterbob/django-portfolio
 
-An artist's portfolio as a pluggable Django app.
+
+What's this?
+------------
+An artist's portfolio as a pluggable Django app, based on the following
+assumptions:
+
+1. A portfolio consists of collections containing artworks.
+2. Artworks have one or more pictures and (optionally) a title and a description.
+3. Artworks can be listed from within collections or categories.
 
 Installation
 ------------
