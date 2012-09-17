@@ -1,6 +1,9 @@
 django-portfolio
 ================
 
+.. image:: https://secure.travis-ci.org/dokterbob/django-portfolio.png
+    :target: http://travis-ci.org/dokterbob/django-portfolio
+
 An artist's portfolio as a pluggable Django app.
 
 Installation
