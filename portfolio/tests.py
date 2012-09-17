@@ -117,6 +117,42 @@ class ArtworkTests(PortfolioTestBase):
         self.assertContains(response, obj.title)
 
 
+    def test_categorydetailview(self):
+        """ Make sure categories are listed in artwork detail. """
+
+        category = self.create_category()
+        category.save()
+
+        obj = self.create_artwork()
+        obj.save()
+
+        obj.categories.add(category)
+
+        url = obj.get_absolute_url()
+
+        # Attempt request
+        response = self.client.get(url)
+
+        # The category title and URL should be in the page, somewhere
+        self.assertContains(response, category.title)
+        self.assertContains(response, category.get_absolute_url())
+
+    def test_collectiondetailview(self):
+        """ Make sure collection is shown in artwork detail. """
+
+        obj = self.create_artwork()
+        obj.save()
+
+        url = obj.get_absolute_url()
+
+        # Attempt request
+        response = self.client.get(url)
+
+        # The category title and URL should be in the page, somewhere
+        self.assertContains(response, obj.collection.title)
+        self.assertContains(response, obj.collection.get_absolute_url())
+
+
 class PictureTests(PortfolioTestBase):
     """ Tests for Pictures. """
 

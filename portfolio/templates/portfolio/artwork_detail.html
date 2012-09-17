@@ -5,7 +5,20 @@
 {% block content %}
     {{ object }}
 
-    {% for picture in object.pictures.all %}
-        {{ picture }}
-    {% endfor %}
+    {% comment %}Pictures{% endcomment %}
+    <ul>
+        {% for picture in object.pictures.all %}
+            <li>{{ picture }}</li>
+        {% endfor %}
+    </ul>
+
+    {% comment %}Categories{% endcomment %}
+    <ul>
+        {% for category in object.categories.all %}
+            <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
+        {% endfor %}
+    </ul>
+
+    {% comment %}Collection{% endcomment %}
+    <a href="{{ object.collection.get_absolute_url }}">{{ object.collection }}</a>
 {% endblock content %}
