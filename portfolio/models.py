@@ -82,7 +82,7 @@ class Artwork(Sortable):
 class Picture(Sortable):
     """ Picture of an artwork. """
 
-    artwork = models.ForeignKey(Artwork)
+    artwork = models.ForeignKey(Artwork, related_name='pictures')
 
     title = models.CharField(_('title'), max_length=255, blank=True)
     image = ImageField(upload_to='portfolio/pictures')

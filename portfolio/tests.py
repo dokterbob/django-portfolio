@@ -51,8 +51,17 @@ class PortfolioTestBase(TestCase):
             collection.save()
 
         obj = Artwork(collection=collection)
-        obj.save()
 
+        return obj
+
+    def create_picture(self, artwork=None, title='Test picture'):
+        """ Create Picture such that it can be saved, but don't. """
+
+        if not artwork:
+            artwork = self.create_artwork()
+            artwork.save()
+
+        obj = Picture(artwork=artwork, title=title)
         return obj
 
 
@@ -104,7 +113,33 @@ class ArtworkTests(PortfolioTestBase):
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
-        # The project title should be in the page, somewhere
+        # The title should be in the page, somewhere
+        self.assertContains(response, obj.title)
+
+
+class PictureTests(PortfolioTestBase):
+    """ Tests for Pictures. """
+
+    def test_create(self):
+        """ Create and save Picture. """
+        obj = self.create_picture()
+        unicode(obj)
+        obj.save()
+
+    def test_picturedetail(self):
+        """ Check for presence of picture title in artwork detail view. """
+
+        obj = self.create_picture()
+        obj.save()
+
+        artwork = obj.artwork
+
+        url = artwork.get_absolute_url()
+
+        # Attempt request
+        response = self.client.get(url)
+
+        # The title should be in the page, somewhere
         self.assertContains(response, obj.title)
 
 
@@ -155,7 +190,7 @@ class CategoryTests(PortfolioTestBase):
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
-        # The project title should be in the page, somewhere
+        # The title should be in the page, somewhere
         self.assertContains(response, obj.title)
 
 
@@ -206,5 +241,5 @@ class CollectionTests(PortfolioTestBase):
         # Check that the response is 200 OK.
         self.assertEqual(response.status_code, 200)
 
-        # The project title should be in the page, somewhere
+        # The title should be in the page, somewhere
         self.assertContains(response, obj.title)

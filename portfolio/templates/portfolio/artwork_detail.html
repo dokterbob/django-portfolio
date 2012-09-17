@@ -4,4 +4,8 @@
 
 {% block content %}
     {{ object }}
+
+    {% for picture in object.pictures.all %}
+        {{ picture }}
+    {% endfor %}
 {% endblock content %}
