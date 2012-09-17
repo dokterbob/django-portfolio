@@ -20,3 +20,6 @@ Installation
         )
 
 6. Done! Have a cup of coffee!
+
+7. Copy the minimal base templates from the `templates folder <https://github.com/dokterbob/django-portfolio/tree/master/portfolio/templates>`_ to your project's template
+   folder and start customizing.
