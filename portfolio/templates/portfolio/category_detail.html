@@ -4,4 +4,10 @@
 
 {% block content %}
     {{ object }}
+
+    <ul>
+    {% for artwork in object.artworks.all %}
+        <li><a href="{{ artwork.get_absolute_url }}">{{ artwork }}</a></li>
+    {% endfor %}
+    </ul>
 {% endblock content %}

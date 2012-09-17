@@ -60,7 +60,9 @@ class Artwork(Sortable):
     title = models.CharField(_('title'), max_length=255)
     description = models.TextField(_('description'), blank=True)
 
-    categories = models.ManyToManyField(Category, null=True, blank=True)
+    categories = models.ManyToManyField(Category,
+        related_name='artworks', null=True, blank=True
+    )
 
     class Meta(Sortable.Meta):
         verbose_name = _('artwork')
