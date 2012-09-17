@@ -12,7 +12,7 @@ from .views import (
 
 urlpatterns = patterns('',
     # Home view
-    surl(r'^/$', HomeView.as_view(),
+    surl(r'^$', HomeView.as_view(),
         name='portfolio_home'
     ),
 
