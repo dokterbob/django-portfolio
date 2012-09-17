@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.core.urlresolvers import reverse
 
 from .models import Artwork, Category, Collection, Picture
 
@@ -65,6 +66,26 @@ class ArtworkTests(PortfolioTestBase):
         unicode(obj)
         obj.save()
 
+    def test_listview(self):
+        """ Test requesting the object. """
+
+        obj = self.create_artwork()
+        obj.save()
+
+        url = reverse('artwork_list')
+        self.assertTrue(url)
+
+        # Attempt request
+        response = self.client.get(url)
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+        # The title should be in the page, somewhere
+        self.assertContains(response, obj.title)
+        self.assertContains(response, obj.get_absolute_url())
+
+
     def test_detailview(self):
         """ Test requesting the object. """
 
@@ -96,6 +117,25 @@ class CategoryTests(PortfolioTestBase):
         obj = self.create_category()
         unicode(obj)
         obj.save()
+
+    def test_listview(self):
+        """ Test requesting the object. """
+
+        obj = self.create_category()
+        obj.save()
+
+        url = reverse('category_list')
+        self.assertTrue(url)
+
+        # Attempt request
+        response = self.client.get(url)
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+        # The title should be in the page, somewhere
+        self.assertContains(response, obj.title)
+        self.assertContains(response, obj.get_absolute_url())
 
     def test_detailview(self):
         """ Test requesting the object. """
@@ -129,10 +169,29 @@ class CollectionTests(PortfolioTestBase):
         unicode(obj)
         obj.save()
 
+    def test_listview(self):
+        """ Test requesting the object. """
+
+        obj = self.create_collection()
+        obj.save()
+
+        url = reverse('collection_list')
+        self.assertTrue(url)
+
+        # Attempt request
+        response = self.client.get(url)
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+        # The title should be in the page, somewhere
+        self.assertContains(response, obj.title)
+        self.assertContains(response, obj.get_absolute_url())
+
     def test_detailview(self):
         """ Test requesting the object. """
 
-        obj = self.create_category()
+        obj = self.create_collection()
         obj.save()
 
         url = obj.get_absolute_url()
