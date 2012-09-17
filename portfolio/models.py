@@ -16,7 +16,16 @@ class Category(models.Model):
         verbose_name_plural = _('categories')
 
     def __unicode__(self):
+        """ Unicode representation for object. """
         return self.title
+
+    @models.permalink
+    def get_absolute_url(self):
+        """ Get URL for object. """
+
+        return ('category_detail', (), {
+            'slug': self.slug
+        })
 
 
 class Collection(Sortable):
@@ -31,7 +40,16 @@ class Collection(Sortable):
         verbose_name_plural = _('collections')
 
     def __unicode__(self):
+        """ Unicode representation for object. """
         return self.title
+
+    @models.permalink
+    def get_absolute_url(self):
+        """ Get URL for object. """
+
+        return ('collection_detail', (), {
+            'slug': self.slug
+        })
 
 
 class Artwork(Sortable):
@@ -49,7 +67,16 @@ class Artwork(Sortable):
         verbose_name_plural = _('artworks')
 
     def __unicode__(self):
+        """ Unicode representation for object. """
         return self.title
+
+    @models.permalink
+    def get_absolute_url(self):
+        """ Get URL for object. """
+
+        return ('artwork_detail', (), {
+            'pk': str(self.pk)
+        })
 
 
 class Picture(Sortable):
@@ -65,6 +92,7 @@ class Picture(Sortable):
         verbose_name_plural = _('pictures')
 
     def __unicode__(self):
+        """ Unicode representation for object. """
         title = self.title or self.pk
 
         return _(u"%(artwork)s: %(title)s") % {
