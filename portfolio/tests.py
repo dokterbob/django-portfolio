@@ -243,3 +243,21 @@ class CollectionTests(PortfolioTestBase):
 
         # The title should be in the page, somewhere
         self.assertContains(response, obj.title)
+
+    def test_artworkdetail(self):
+        """ Make sure artworks are listed for collection detail. """
+
+        obj = self.create_collection()
+        obj.save()
+
+        artwork = self.create_artwork(collection=obj)
+        artwork.save()
+
+        url = obj.get_absolute_url()
+
+        # Attempt request
+        response = self.client.get(url)
+
+        # The title should be in the page, somewhere
+        self.assertContains(response, artwork.title)
+        self.assertContains(response, artwork.get_absolute_url())

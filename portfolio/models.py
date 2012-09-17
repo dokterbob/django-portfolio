@@ -55,7 +55,7 @@ class Collection(Sortable):
 class Artwork(Sortable):
     """ Piece of art. """
 
-    collection = models.ForeignKey(Collection)
+    collection = models.ForeignKey(Collection, related_name='artworks')
 
     title = models.CharField(_('title'), max_length=255)
     description = models.TextField(_('description'), blank=True)

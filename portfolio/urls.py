@@ -19,10 +19,10 @@ urlpatterns = patterns('',
     ),
 
     # Artwork views
-    surl(r'^artworks/$', ArtworkListView.as_view(),
+    surl(r'^works/$', ArtworkListView.as_view(),
         name='artwork_list'
     ),
-    surl(r'^artworks/<pk:#>/$', ArtworkDetailView.as_view(),
+    surl(r'^works/<pk:#>/$', ArtworkDetailView.as_view(),
         name='artwork_detail'
     ),
 
