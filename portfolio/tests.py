@@ -198,6 +198,16 @@ class PictureTests(PortfolioTestBase):
         # The title should be in the page, somewhere
         self.assertContains(response, obj.title)
 
+    def test_defaultpicture(self):
+        """ Test the default image. """
+
+        obj = self.create_picture()
+        obj.save()
+
+        artwork = obj.artwork
+
+        self.assertEquals(artwork.get_default_picture(), obj)
+
 
 class CategoryTests(PortfolioTestBase):
     """ Tests for Categories. """

@@ -1,0 +1,8 @@
+{% load thumbnail %}
+{% with object.get_default_picture as picture %}
+{% thumbnail picture.image "160x160" crop="center" as thumbnail %}
+    <li><a href="{{ object.get_absolute_url }}"><img src="{{ thumbnail.url }}" width="{{ thumbnail.width}}" height="{{ thumbnail.height }}" alt="{{ object }}"/></a></li>
+{% empty %}
+    <li><a href="{{ object.get_absolute_url }}"><img src="http://placekitten.com/160/160" width="160" height="160" alt="{{ object }}"/></a></li>
+{% endthumbnail %}
+{% endwith %}

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from adminsortable.models import Sortable
@@ -79,6 +82,16 @@ class Artwork(Sortable):
         return ('artwork_detail', (), {
             'pk': str(self.pk)
         })
+
+    def get_default_picture(self):
+        """ By default, get the first picture for this Artwork or None. """
+        qs = self.pictures.all()
+
+        try:
+            return qs[0]
+        except IndexError:
+            logger.warn('No (default) picture available for %s', self)
+            return None
 
 
 class Picture(Sortable):

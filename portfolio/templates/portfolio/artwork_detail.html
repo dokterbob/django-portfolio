@@ -1,24 +1,32 @@
 {% extends "portfolio/base.html" %}
+{% load thumbnail %}
 
 {% block title %}{{ superblock }} - {{ object.title }}{% endblock %}
 
 {% block content %}
-    {{ object }}
+    <h1>{{ object.title }}</h1>
 
-    {% comment %}Pictures{% endcomment %}
+    <h2>Description</h2>
+    {{ object.description }}
+
+    <h2>Pictures</h2>
     <ul>
         {% for picture in object.pictures.all %}
-            <li>{{ picture }}</li>
+            {% thumbnail picture.image "640" as thumbnail %}
+                <li><img src="{{ thumbnail.url }}" width="{{ thumbnail.width}}" height="{{ thumbnail.height }}" alt="{{ picture }}"/></li>
+            {% empty %}
+                <li><img src="http://placekitten.com/640/480" width="640" height="480" alt="{{ picture }}"/></li>
+            {% endthumbnail %}
         {% endfor %}
     </ul>
 
-    {% comment %}Categories{% endcomment %}
+    <h2>Categories</h2>
     <ul>
         {% for category in object.categories.all %}
             <li><a href="{{ category.get_absolute_url }}">{{ category }}</a></li>
         {% endfor %}
     </ul>
 
-    {% comment %}Collection{% endcomment %}
+    <h2>Collection</h2>
     <a href="{{ object.collection.get_absolute_url }}">{{ object.collection }}</a>
 {% endblock content %}
