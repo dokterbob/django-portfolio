@@ -5,7 +5,8 @@ DATABASES = {
 }
 
 INSTALLED_APPS = (
-    'portfolio',
+    'sorl.thumbnail',
+    'portfolio'
 )
 
 ROOT_URLCONF = 'test_urls'
