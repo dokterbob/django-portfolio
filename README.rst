@@ -19,7 +19,20 @@ Installation
             ...
         )
 
-6. Done! Have a cup of coffee!
+6. Have a cup of coffee! You deserve one; basic integration of the portfolio app is done now.
 
 7. Copy the minimal base templates from the `templates folder <https://github.com/dokterbob/django-portfolio/tree/master/portfolio/templates>`_ to your project's template
    folder and start customizing.
+
+8. (Optionally) Configure `sitemaps <https://docs.djangoproject.com/en/dev/ref/contrib/sitemaps/>`_ by updating
+   your sitemaps dictionary with `portfolio.sitemaps.portfolio_sitemaps`.
+
+   For example::
+
+        from portfolio.sitemaps import portfolio_sitemaps
+
+        sitemaps = {
+            'blog': GenericSitemap(info_dict, priority=0.6),
+        }
+
+        sitemaps.update(portfolio_sitemaps)
