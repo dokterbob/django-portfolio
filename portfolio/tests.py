@@ -65,6 +65,26 @@ class PortfolioTestBase(TestCase):
         return obj
 
 
+class HomeTests(PortfolioTestBase):
+    """
+    Test the home/root view: it should redirect to the collection list.
+    """
+
+    def test_redirect(self):
+        """ Test whether the redirect works. """
+
+        url = reverse('portfolio_home')
+        collection_list_url = reverse('collection_list')
+
+        # Attempt request
+        response = self.client.get(url, follow=True)
+
+        # Assure status is permanent redirect
+        redirect = response.redirect_chain[0]
+        self.assertIn(collection_list_url, redirect[0])
+        self.assertEquals(redirect[1], 301)
+
+
 class ArtworkTests(PortfolioTestBase):
     """ Tests for Artworks. """
 

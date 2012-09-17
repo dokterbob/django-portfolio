@@ -3,6 +3,7 @@ from django.conf.urls import patterns
 from surlex.dj import surl
 
 from .views import (
+    HomeView,
     ArtworkDetailView, ArtworkListView,
     CollectionListView, CollectionDetailView,
     CategoryListView, CategoryDetailView
@@ -10,6 +11,11 @@ from .views import (
 
 
 urlpatterns = patterns('',
+    # Home view
+    surl(r'^/$', HomeView.as_view(),
+        name='portfolio_home'
+    ),
+
     # Collection views
     surl(r'^collections/$', CollectionListView.as_view(),
         name='collection_list'

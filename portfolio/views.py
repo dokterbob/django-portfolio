@@ -1,6 +1,15 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, RedirectView
+from django.core.urlresolvers import reverse
 
 from .models import Artwork, Category, Collection
+
+
+class HomeView(RedirectView):
+    """ Home view redirects to collection list. """
+    permanent = True
+
+    def get_redirect_url(self, **kwargs):
+        return reverse('collection_list')
 
 
 class ArtworkViewBase(object):
