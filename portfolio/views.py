@@ -1,6 +1,6 @@
 from django.views.generic import ListView, DetailView
 
-from .models import Artwork, Picture, Category, Collection
+from .models import Artwork, Category, Collection
 
 
 class ArtworkViewBase(object):
@@ -24,4 +24,16 @@ class CollectionDetailView(CollectionViewBase, DetailView):
 
 
 class CollectionListView(CollectionViewBase, ListView):
+    pass
+
+
+class CategoryViewBase(object):
+    model = Category
+
+
+class CategoryDetailView(CategoryViewBase, DetailView):
+    pass
+
+
+class CategoryListView(CategoryViewBase, ListView):
     pass
