@@ -36,7 +36,7 @@ class ArtworkAdmin(SortableAdmin):
     inlines = [PictureInline]
     filter_horizontal = ['categories']
     list_per_page = 15
-    list_display = ('thumbnail', 'title')
+    list_display = ('thumbnail', 'title', 'collection')
     list_display_links = list_display
     list_filter = ('collection', 'categories')
 
