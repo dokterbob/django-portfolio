@@ -4,6 +4,11 @@ DATABASES = {
     }
 }
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'portfolio.context_processors.collections',
+    'portfolio.context_processors.artworks'
+)
+
 INSTALLED_APPS = (
     'sorl.thumbnail',
     'portfolio'
