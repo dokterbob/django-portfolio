@@ -2,6 +2,7 @@ from django.contrib import admin
 
 from adminsortable.admin import SortableStackedInline, SortableAdmin
 from sorl.thumbnail.admin import AdminImageMixin
+from sorl.thumbnail import get_thumbnail
 
 from .models import Category, Picture, Artwork, Collection
 
@@ -34,6 +35,25 @@ class ArtworkAdmin(SortableAdmin):
     model = Artwork
     inlines = [PictureInline]
     filter_horizontal = ['categories']
+    list_per_page = 15
+    list_display = ('thumbnail', 'title', 'collection')
+    list_display_links = list_display
+    list_filter = ('collection', 'categories')
+
+    def thumbnail(self, obj):
+        thumbnail_format = '100x100'
+        picture = obj.get_default_picture()
+
+        if picture:
+            thumb = get_thumbnail(
+                picture.image, thumbnail_format, crop='center'
+            )
+
+            return '<img src="%s" width="%s" height="%s" alt="%s"/>' \
+                % (thumb.url,  thumb.width, thumb.height, obj.title)
+
+        return ''
+    thumbnail.allow_tags = True
 
 
 admin.site.register(Collection, CollectionAdmin)

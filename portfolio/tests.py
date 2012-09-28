@@ -173,6 +173,23 @@ class ArtworkTests(PortfolioTestBase):
         self.assertContains(response, obj.collection.get_absolute_url())
 
 
+    def test_context_processors(self):
+        """ Test the collections and artworks context processors. """
+
+        obj = self.create_artwork()
+        obj.save()
+
+        url = obj.get_absolute_url()
+        response = self.client.get(url)
+
+        # Assert 'collections' and 'artworks' are in context
+        self.assertIn('collections', response.context)
+        self.assertIn('artworks', response.context)
+
+        self.assertIn(obj, response.context['artworks'])
+        self.assertIn(obj.collection, response.context['collections'])
+
+
 class PictureTests(PortfolioTestBase):
     """ Tests for Pictures. """
 
