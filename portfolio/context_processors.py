@@ -1,4 +1,4 @@
-from .models import Collection, Artwork
+from .models import Collection, Artwork, Category
 
 
 def collections(request):
@@ -11,3 +11,9 @@ def artworks(request):
     """ Add `artworks` to RequestContext. """
 
     return {'artworks': Artwork.objects.all()}
+
+
+def categories(request):
+    """ Add `categories` to RequestContext. """
+
+    return {'categories': Category.objects.all()}
