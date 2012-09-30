@@ -8,7 +8,7 @@ from adminsortable.models import Sortable
 from sorl.thumbnail import ImageField
 
 
-class Category(models.Model):
+class Category(Sortable):
     """ Categorization for works. """
 
     title = models.CharField(_('title'), max_length=255)

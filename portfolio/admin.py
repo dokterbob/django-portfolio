@@ -21,7 +21,7 @@ class CollectionAdmin(SortableAdmin):
     inlines = [ArtworkInline]
 
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(SortableAdmin):
     model = Category
     prepopulated_fields = {"slug": ("title",)}
 
