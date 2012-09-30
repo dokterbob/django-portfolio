@@ -14,7 +14,7 @@ class Category(Sortable):
     title = models.CharField(_('title'), max_length=255)
     slug = models.SlugField(_('slug'), unique=True)
 
-    class Meta:
+    class Meta(Sortable.Meta):
         verbose_name = _('category')
         verbose_name_plural = _('categories')
 
@@ -38,7 +38,7 @@ class Collection(Sortable):
     slug = models.SlugField(_('slug'), unique=True)
     description = models.TextField(_('description'), blank=True)
 
-    class Meta:
+    class Meta(Sortable.Meta):
         verbose_name = _('collection')
         verbose_name_plural = _('collections')
 
