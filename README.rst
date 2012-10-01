@@ -44,11 +44,21 @@ Installation
         }
 
         sitemaps.update(portfolio_sitemaps)
+        ...
+        urlpatterns = patterns('',
+            (r'^portfolio/', include('portfolio.urls')),
 
-9. (Optionally) Enable `collections`/`artworks` `template context processors <https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors>`_ in `settings.py`::
+            # Sitemaps
+            (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap',
+                {'sitemaps': sitemaps}),
+        )
+
+9. (Optionally) Enable `template context processors <https://docs.djangoproject.com/en/dev/ref/settings/#template-context-processors>`_
+   for `collections`, `artworks` and/or `categories`  in `settings.py`::
 
         TEMPLATE_CONTEXT_PROCESSORS = (
             ...
             'portfolio.context_processors.collections',
             'portfolio.context_processors.artworks'
+            'portfolio.context_processors.categories'
         )
