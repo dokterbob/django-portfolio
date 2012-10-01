@@ -6,7 +6,8 @@ DATABASES = {
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'portfolio.context_processors.collections',
-    'portfolio.context_processors.artworks'
+    'portfolio.context_processors.artworks',
+    'portfolio.context_processors.categories'
 )
 
 INSTALLED_APPS = (

@@ -185,9 +185,16 @@ class ArtworkTests(PortfolioTestBase):
         # Assert 'collections' and 'artworks' are in context
         self.assertIn('collections', response.context)
         self.assertIn('artworks', response.context)
+        self.assertIn('categories', response.context)
 
         self.assertIn(obj, response.context['artworks'])
         self.assertIn(obj.collection, response.context['collections'])
+
+        # Check category context processor
+        category = self.create_category()
+        category.save()
+
+        self.assertEquals([category, ], list(response.context['categories']))
 
 
 class PictureTests(PortfolioTestBase):
