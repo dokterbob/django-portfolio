@@ -14,6 +14,17 @@ assumptions:
 2. Artworks have one or more pictures and (optionally) a title and a description.
 3. Artworks can be listed from within collections or categories.
 
+Features
+--------
+* Well tested, decent code coverage and used in production environments.
+* Makes good use of Django's admin; drag and drop sorting, search, filtering, 
+  pagination and thumbnail previews.
+* All strings are fully translatable (will integrate with Transifex 
+  on request, feel free to create a GitHub issue).
+* Optional template context processors and sitemaps available.
+* Very basic front-end templates to help kickstart integration.
+* South migrations available for hassle-free upgrade paths.
+
 Installation
 ------------
 1. `pip install -e https://github.com/dokterbob/django-portfolio.git#egg=django-portfolio`
