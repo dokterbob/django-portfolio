@@ -21,7 +21,6 @@ class PortfolioTestBase(TestCase):
 
         return slug
 
-
     def create_category(self, slug=None, title='Test category'):
         """ Create Category such that it can be saved, but don't save it. """
 
@@ -41,7 +40,6 @@ class PortfolioTestBase(TestCase):
         obj = Collection(slug=slug, title=title)
 
         return obj
-
 
     def create_artwork(self, collection=None):
         """ Create artwork such that it can be saved - but don't save. """
@@ -114,7 +112,6 @@ class ArtworkTests(PortfolioTestBase):
         self.assertContains(response, obj.title)
         self.assertContains(response, obj.get_absolute_url())
 
-
     def test_detailview(self):
         """ Test requesting the object. """
 
@@ -135,7 +132,6 @@ class ArtworkTests(PortfolioTestBase):
 
         # The title should be in the page, somewhere
         self.assertContains(response, obj.title)
-
 
     def test_categorydetailview(self):
         """ Make sure categories are listed in artwork detail. """
@@ -171,7 +167,6 @@ class ArtworkTests(PortfolioTestBase):
         # The category title and URL should be in the page, somewhere
         self.assertContains(response, obj.collection.title)
         self.assertContains(response, obj.collection.get_absolute_url())
-
 
     def test_context_processors(self):
         """ Test the collections and artworks context processors. """
