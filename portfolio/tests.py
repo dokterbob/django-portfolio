@@ -191,6 +191,24 @@ class ArtworkTests(PortfolioTestBase):
 
         self.assertEquals([category, ], list(response.context['categories']))
 
+    def test_sitemap(self):
+        """ Test the Artworks sitemap. """
+
+        obj = self.create_artwork()
+        obj.save()
+
+        url = reverse('django.contrib.sitemaps.views.sitemap')
+        self.assertTrue(url)
+
+        # Attempt request
+        response = self.client.get(url)
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, obj.get_absolute_url())
+        self.assertContains(response, str(obj.modified.date()))
+
 
 class PictureTests(PortfolioTestBase):
     """ Tests for Pictures. """
@@ -298,6 +316,23 @@ class CategoryTests(PortfolioTestBase):
         self.assertContains(response, artwork.title)
         self.assertContains(response, artwork.get_absolute_url())
 
+    def test_sitemap(self):
+        """ Test the Category sitemap. """
+
+        obj = self.create_category()
+        obj.save()
+
+        url = reverse('django.contrib.sitemaps.views.sitemap')
+        self.assertTrue(url)
+
+        # Attempt request
+        response = self.client.get(url)
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, obj.get_absolute_url())
+
 
 class CollectionTests(PortfolioTestBase):
     """ Tests for Collections. """
@@ -366,3 +401,20 @@ class CollectionTests(PortfolioTestBase):
         # The title should be in the page, somewhere
         self.assertContains(response, artwork.title)
         self.assertContains(response, artwork.get_absolute_url())
+
+    def test_sitemap(self):
+        """ Test the Collection sitemap. """
+
+        obj = self.create_collection()
+        obj.save()
+
+        url = reverse('django.contrib.sitemaps.views.sitemap')
+        self.assertTrue(url)
+
+        # Attempt request
+        response = self.client.get(url)
+
+        # Check that the response is 200 OK.
+        self.assertEqual(response.status_code, 200)
+
+        self.assertContains(response, obj.get_absolute_url())
