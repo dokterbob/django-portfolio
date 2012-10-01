@@ -7,6 +7,9 @@ class ArtworkSitemap(Sitemap):
     def items(self):
         return Artwork.objects.all()
 
+    def lastmod(self, obj):
+        return obj.modified
+
 
 class CollectionSitemap(Sitemap):
     def items(self):

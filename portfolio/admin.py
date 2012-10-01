@@ -38,8 +38,9 @@ class ArtworkAdmin(SortableAdmin):
     list_per_page = 15
     list_display = ('thumbnail', 'title', 'collection')
     list_display_links = list_display
-    list_filter = ('collection', 'categories')
+    list_filter = ('collection', 'categories', 'created', 'modified')
     search_fields = ('title', 'collection__title', 'categories__title')
+    readonly_fields = ('created', 'modified')
 
     def thumbnail(self, obj):
         thumbnail_format = '100x100'

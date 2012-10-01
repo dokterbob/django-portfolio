@@ -8,6 +8,18 @@ from adminsortable.models import Sortable
 from sorl.thumbnail import ImageField
 
 
+class TimeStampedModel(models.Model):
+    """
+    An abstract base class model that provides self-managed "created" and
+    "modified" fields, borrowed from django_extensions.
+    """
+    created = models.DateTimeField(_('created'), auto_now_add=True)
+    modified = models.DateTimeField(_('modified'), auto_now=True)
+
+    class Meta:
+        abstract = True
+
+
 class Category(Sortable):
     """ Categorization for works. """
 
@@ -55,7 +67,7 @@ class Collection(Sortable):
         })
 
 
-class Artwork(Sortable):
+class Artwork(Sortable, TimeStampedModel):
     """ Piece of art. """
 
     collection = models.ForeignKey(Collection, related_name='artworks')
