@@ -1,3 +1,8 @@
+import logging
+logger = logging.getLogger(__name__)
+
+import sys
+
 from django.contrib import admin
 
 from adminsortable.admin import SortableStackedInline, SortableAdmin
@@ -47,13 +52,15 @@ class ArtworkAdmin(SortableAdmin):
         picture = obj.get_default_picture()
 
         if picture:
-            thumb = get_thumbnail(
-                picture.image, thumbnail_format, crop='center'
-            )
+            try:
+                thumb = get_thumbnail(
+                    picture.image, thumbnail_format, crop='center'
+                )
 
-            return '<img src="%s" width="%s" height="%s" alt="%s"/>' \
-                % (thumb.url,  thumb.width, thumb.height, obj.title)
-
+                return '<img src="%s" width="%s" height="%s" alt="%s"/>' \
+                    % (thumb.url,  thumb.width, thumb.height, obj.title)
+            except Exception:
+                logger.error('Admin list thumbnail failed.', exc_info=sys.exc_info())
         return ''
     thumbnail.allow_tags = True
 
