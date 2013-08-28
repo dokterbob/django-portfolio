@@ -17,9 +17,9 @@ assumptions:
 Features
 --------
 * Well tested, decent code coverage and used in production environments.
-* Makes good use of Django's admin; drag and drop sorting, search, filtering, 
+* Makes good use of Django's admin; drag and drop sorting, search, filtering,
   pagination and thumbnail previews.
-* All strings are fully translatable (will integrate with Transifex 
+* All strings are fully translatable (will integrate with Transifex
   on request, feel free to create a GitHub issue).
 * Optional template context processors and sitemaps available.
 * Very basic front-end templates to help kickstart integration.
@@ -29,7 +29,7 @@ Installation
 ------------
 1. `pip install -e git+https://github.com/dokterbob/django-portfolio.git#egg=django-portfolio`
 2. Follow `sorl-thumbnail's installation instructions <http://sorl-thumbnail.readthedocs.org/en/latest/installation.html#setup>`_.
-3. Follow `django-admin-sortable's installation instructions <http://pypi.python.org/pypi/django-admin-sortable/>`_.
+3. Follow `django-admin-sortable's installation instructions <https://github.com/iambrandontaylor/django-admin-sortable?source=c>`_.
 4. Add `portfolio` to `INSTALLED_APPS`.
 5. Include URL's into Django's URL space, like such::
 
