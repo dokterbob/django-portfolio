@@ -27,7 +27,7 @@ Features
 
 Installation
 ------------
-1. `pip install -e https://github.com/dokterbob/django-portfolio.git#egg=django-portfolio`
+1. `pip install -e git+https://github.com/dokterbob/django-portfolio.git#egg=django-portfolio`
 2. Follow `sorl-thumbnail's installation instructions <http://sorl-thumbnail.readthedocs.org/en/latest/installation.html#setup>`_.
 3. Follow `django-admin-sortable's installation instructions <http://pypi.python.org/pypi/django-admin-sortable/>`_.
 4. Add `portfolio` to `INSTALLED_APPS`.
