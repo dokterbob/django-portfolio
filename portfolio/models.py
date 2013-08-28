@@ -80,8 +80,8 @@ class Artwork(Sortable, TimeStampedModel):
     )
 
     class Meta(Sortable.Meta):
-        verbose_name = _('artwork')
-        verbose_name_plural = _('artworks')
+        verbose_name = _('work')
+        verbose_name_plural = _('works')
 
     def __unicode__(self):
         """ Unicode representation for object. """
