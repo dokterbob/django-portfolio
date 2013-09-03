@@ -1,5 +1,6 @@
 Django>=1.4.6
 surlex
 sorl-thumbnail
-# Versions 1.5 and up require Django 1.5
-django-admin-sortable>=1.4.9,<1.5
+# Django 1.4 requires 1.4, 1.5 requires 1.5
+django-admin-sortable
+django-multilingual-model

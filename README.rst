@@ -29,7 +29,9 @@ Installation
 ------------
 1. `pip install -e git+https://github.com/dokterbob/django-portfolio.git#egg=django-portfolio`
 2. Follow `sorl-thumbnail's installation instructions <http://sorl-thumbnail.readthedocs.org/en/latest/installation.html#setup>`_.
-3. Follow `django-admin-sortable's installation instructions <https://github.com/iambrandontaylor/django-admin-sortable?source=c>`_.
+3. Follow `django-admin-sortable's installation instructions <https://github.com/iambrandontaylor/django-admin-sortable?source=c>`_. Make sure to install
+the admin-sortable version corresponding to your Django release (1.4.x for 1.4.x)
+and (1.5.x for 1.5.x).
 4. Add `portfolio` to `INSTALLED_APPS`.
 5. Include URL's into Django's URL space, like such::
 
