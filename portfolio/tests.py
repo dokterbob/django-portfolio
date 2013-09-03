@@ -1,7 +1,10 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 
-from .models import Artwork, Category, Collection, Picture
+from .models import (
+    Artwork, ArtworkTranslation, Category, CategoryTranslation,
+    Collection, CollectionTranslation, Picture
+)
 
 
 class PortfolioTestBase(TestCase):
@@ -21,23 +24,23 @@ class PortfolioTestBase(TestCase):
 
         return slug
 
-    def create_category(self, slug=None, title='Test category'):
+    def create_category(self, slug=None):
         """ Create Category such that it can be saved, but don't save it. """
 
         if not slug:
             slug = self.get_unique_slug(Category)
 
-        obj = Category(slug=slug, title=title)
+        obj = Category(slug=slug)
 
         return obj
 
-    def create_collection(self, slug=None, title='Test collection'):
+    def create_collection(self, slug=None):
         """ Create collection such that it can be saved, but don't save. """
 
         if not slug:
             slug = self.get_unique_slug(Category)
 
-        obj = Collection(slug=slug, title=title)
+        obj = Collection(slug=slug)
 
         return obj
 
@@ -46,6 +49,7 @@ class PortfolioTestBase(TestCase):
 
         if not collection:
             collection = self.create_collection()
+
             collection.save()
 
         obj = Artwork(collection=collection)
@@ -98,6 +102,11 @@ class ArtworkTests(PortfolioTestBase):
 
         obj = self.create_artwork()
         obj.save()
+
+        # Create a translation for Artwork
+        ArtworkTranslation(
+            parent=obj, language_code='en', title='Artwork title'
+        ).save()
 
         url = reverse('artwork_list')
         self.assertTrue(url)
@@ -262,6 +271,11 @@ class CategoryTests(PortfolioTestBase):
         obj = self.create_category()
         obj.save()
 
+        # Create a translation for Artwork
+        CategoryTranslation(
+            parent=obj, language_code='en', title='Category title'
+        ).save()
+
         url = reverse('category_list')
         self.assertTrue(url)
 
@@ -304,6 +318,11 @@ class CategoryTests(PortfolioTestBase):
 
         artwork = self.create_artwork()
         artwork.save()
+
+        # Create a translation for Artwork
+        ArtworkTranslation(
+            parent=artwork, language_code='en', title='Artwork title'
+        ).save()
 
         artwork.categories.add(obj)
 
@@ -349,6 +368,11 @@ class CollectionTests(PortfolioTestBase):
 
         obj = self.create_collection()
         obj.save()
+
+        # Create a translation for Artwork
+        CollectionTranslation(
+            parent=obj, language_code='en', title='Collection title'
+        ).save()
 
         url = reverse('collection_list')
         self.assertTrue(url)

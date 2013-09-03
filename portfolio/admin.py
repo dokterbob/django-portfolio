@@ -9,7 +9,12 @@ from adminsortable.admin import SortableStackedInline, SortableAdmin
 from sorl.thumbnail.admin import AdminImageMixin
 from sorl.thumbnail import get_thumbnail
 
-from .models import Category, Picture, Artwork, Collection
+from multilingual_model.admin import TranslationStackedInline
+
+from .models import (
+    Category, CategoryTranslation, Picture,
+    Artwork, ArtworkTranslation, Collection, CollectionTranslation
+)
 
 
 class ArtworkInline(SortableStackedInline):
@@ -19,16 +24,26 @@ class ArtworkInline(SortableStackedInline):
     fields = ['title', ]
     readonly_fields = fields
 
+    def title(self, obj):
+        return unicode(obj)
+
+
+class CollectionTranslationInline(TranslationStackedInline):
+    model = CollectionTranslation
+
 
 class CollectionAdmin(SortableAdmin):
     model = Collection
-    prepopulated_fields = {"slug": ("title",)}
-    inlines = [ArtworkInline]
+    inlines = [CollectionTranslationInline, ArtworkInline]
+
+
+class CategoryTranslationInline(TranslationStackedInline):
+    model = CategoryTranslation
 
 
 class CategoryAdmin(SortableAdmin):
+    inlines = [CategoryTranslationInline]
     model = Category
-    prepopulated_fields = {"slug": ("title",)}
 
 
 class PictureInline(AdminImageMixin, SortableStackedInline):
@@ -36,16 +51,26 @@ class PictureInline(AdminImageMixin, SortableStackedInline):
     extra = 1
 
 
+class ArtworkTranslationInline(TranslationStackedInline):
+    model = ArtworkTranslation
+
+
 class ArtworkAdmin(SortableAdmin):
     model = Artwork
-    inlines = [PictureInline]
+    inlines = [ArtworkTranslationInline, PictureInline]
     filter_horizontal = ['categories']
     list_per_page = 15
     list_display = ('thumbnail', 'title', 'collection')
     list_display_links = list_display
     list_filter = ('collection', 'categories', 'created', 'modified')
-    search_fields = ('title', 'collection__title', 'categories__title')
+    search_fields = (
+        'translation__title', 'collection__translation__title',
+        'categories__translation__title'
+    )
     readonly_fields = ('created', 'modified')
+
+    def title(self, obj):
+        return unicode(obj)
 
     def thumbnail(self, obj):
         thumbnail_format = '100x100'

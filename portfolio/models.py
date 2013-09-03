@@ -3,9 +3,15 @@ logger = logging.getLogger(__name__)
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext
+
 from adminsortable.models import Sortable
 
 from sorl.thumbnail import ImageField
+
+from multilingual_model.models import (
+    MultilingualModel, MultilingualTranslation
+)
 
 
 class TimeStampedModel(models.Model):
@@ -20,10 +26,9 @@ class TimeStampedModel(models.Model):
         abstract = True
 
 
-class Category(Sortable):
+class Category(MultilingualModel, Sortable):
     """ Categorization for works. """
 
-    title = models.CharField(_('title'), max_length=255)
     slug = models.SlugField(_('slug'), unique=True)
 
     class Meta(Sortable.Meta):
@@ -32,7 +37,7 @@ class Category(Sortable):
 
     def __unicode__(self):
         """ Unicode representation for object. """
-        return self.title
+        return self.unicode_wrapper('title', default=ugettext('Unnamed'))
 
     @models.permalink
     def get_absolute_url(self):
@@ -43,12 +48,21 @@ class Category(Sortable):
         })
 
 
-class Collection(Sortable):
-    """ A collection of artworks. """
+class CategoryTranslation(MultilingualTranslation):
+    """ Translation for a category object. """
+
+    parent = models.ForeignKey('Category', related_name='translations')
 
     title = models.CharField(_('title'), max_length=255)
+
+    class Meta:
+        unique_together = ('parent', 'language_code')
+
+
+class Collection(MultilingualModel, Sortable):
+    """ A collection of artworks. """
+
     slug = models.SlugField(_('slug'), unique=True)
-    description = models.TextField(_('description'), blank=True)
 
     class Meta(Sortable.Meta):
         verbose_name = _('collection')
@@ -56,7 +70,7 @@ class Collection(Sortable):
 
     def __unicode__(self):
         """ Unicode representation for object. """
-        return self.title
+        return self.unicode_wrapper('title', default=ugettext('Unnamed'))
 
     @models.permalink
     def get_absolute_url(self):
@@ -67,16 +81,24 @@ class Collection(Sortable):
         })
 
 
-class Artwork(Sortable, TimeStampedModel):
-    """ Piece of art. """
+class CollectionTranslation(MultilingualTranslation):
+    """ Translation for a collection object. """
 
-    collection = models.ForeignKey(Collection, related_name='artworks')
+    parent = models.ForeignKey('Collection', related_name='translations')
 
     title = models.CharField(_('title'), max_length=255)
     description = models.TextField(_('description'), blank=True)
 
-    categories = models.ManyToManyField(Category,
-        related_name='artworks', null=True, blank=True
+    class Meta:
+        unique_together = ('parent', 'language_code')
+
+
+class Artwork(MultilingualModel, Sortable, TimeStampedModel):
+    """ Piece of art. """
+
+    collection = models.ForeignKey(Collection, related_name='artworks')
+    categories = models.ManyToManyField(
+        Category, related_name='artworks', null=True, blank=True
     )
 
     class Meta(Sortable.Meta):
@@ -85,7 +107,7 @@ class Artwork(Sortable, TimeStampedModel):
 
     def __unicode__(self):
         """ Unicode representation for object. """
-        return self.title
+        return self.unicode_wrapper('title', default=ugettext('Unnamed'))
 
     @models.permalink
     def get_absolute_url(self):
@@ -104,6 +126,18 @@ class Artwork(Sortable, TimeStampedModel):
         except IndexError:
             logger.warn('No (default) picture available for %s', self)
             return None
+
+
+class ArtworkTranslation(MultilingualTranslation):
+    """ Translation for an artwork object. """
+
+    parent = models.ForeignKey('Artwork', related_name='translations')
+
+    title = models.CharField(_('title'), max_length=255)
+    description = models.TextField(_('description'), blank=True)
+
+    class Meta:
+        unique_together = ('parent', 'language_code')
 
 
 class Picture(Sortable):
