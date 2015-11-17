@@ -76,7 +76,7 @@ class Artwork(Sortable, TimeStampedModel):
     description = models.TextField(_('description'), blank=True)
 
     categories = models.ManyToManyField(Category,
-        related_name='artworks', null=True, blank=True
+        related_name='artworks', blank=True
     )
 
     class Meta(Sortable.Meta):
