@@ -35,7 +35,7 @@ except ImportError:
     # South not installed and hence is not required
     pass
 
-ROOT_URLCONF = 'test_urls'
+ROOT_URLCONF = 'tests.urls'
 
 SITE_ID = 1
 
