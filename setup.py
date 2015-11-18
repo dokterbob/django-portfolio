@@ -32,5 +32,8 @@ setup(
       'Programming Language :: Python',
       'Topic :: Utilities'
     ],
-    test_suite='runtests.runtests'
+    test_suite='runtests.runtests',
+    tests_require=(
+        'Pillow',
+    )
 )
