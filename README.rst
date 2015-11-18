@@ -1,4 +1,4 @@
-sudjango-portfolio
+django-portfolio
 ================
 
 .. image:: https://img.shields.io/travis/dokterbob/django-portfolio/master.svg
