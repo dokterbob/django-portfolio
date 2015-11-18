@@ -1,0 +1,6 @@
+[run]
+source = portfolio
+branch = True
+
+[report]
+omit = portfolio/migrations/*, portfolio/south_migrations/*, portfolio/tests/*

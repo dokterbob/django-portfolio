@@ -12,18 +12,18 @@ except:
     REQUIREMENTS = None
 
 setup(
-    name = 'django-portfolio',
-    version = "0.1",
-    description = 'An artist\'s portfolio as a pluggable Django app.',
-    long_description = README,
-    install_requires = REQUIREMENTS,
-    author = 'Mathijs de Bruin',
-    author_email = 'mathijs@mathijsfietst.nl',
-    url = 'http://github.com/dokterbob/django-portfolio/',
-    packages = find_packages(),
-    include_package_data = True,
-    classifiers = [
-      'Development Status :: 3 - Alpha',
+    name='django-portfolio',
+    version="0.1",
+    description='An artist\'s portfolio as a pluggable Django app.',
+    long_description=README,
+    install_requires=REQUIREMENTS,
+    author='Mathijs de Bruin',
+    author_email='mathijs@mathijsfietst.nl',
+    url='http://github.com/dokterbob/django-portfolio/',
+    packages=find_packages(),
+    include_package_data=True,
+    classifiers=[
+      'Development Status :: 4 - Beta',
       'Environment :: Web Environment',
       'Framework :: Django',
       'Intended Audience :: Developers',
@@ -32,9 +32,5 @@ setup(
       'Programming Language :: Python',
       'Topic :: Utilities'
     ],
-    test_suite='setuptest.setuptest.SetupTestSuite',
-    tests_require=(
-        'django-setuptest',
-        'argparse',  # apparently needed by django-setuptest on python 2.6
-    ),
+    test_suite='runtests.runtests'
 )

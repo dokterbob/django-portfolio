@@ -1,8 +1,15 @@
-django-portfolio
+sudjango-portfolio
 ================
 
-.. image:: https://secure.travis-ci.org/dokterbob/django-portfolio.png
+.. image:: https://img.shields.io/travis/dokterbob/django-portfolio/master.svg
     :target: http://travis-ci.org/dokterbob/django-portfolio
+
+.. image:: https://img.shields.io/coveralls/dokterbob/django-portfolio/master.svg
+    :target: https://coveralls.io/github/dokterbob/django-portfolio
+
+.. image:: https://landscape.io/github/dokterbob/django-portfolio/master/landscape.svg?style=flat
+   :target: https://landscape.io/github/dokterbob/django-portfolio/master
+   :alt: Code Health
 
 
 What's this?
